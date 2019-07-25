@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-default" color-on-scroll="500" style="background-color: #000f16">
+  <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
+    <span class="navbar-toggler-bar"></span>
+    <span class="navbar-toggler-bar"></span>
+    <span class="navbar-toggler-bar"></span>
+</button>
+  <a class="navbar-brand" href="#">Menu</a>
+  <div class="collapse navbar-collapse" id="navbar-menu">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home">Inicio <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/conferencias" >Conferencias</a>
+          </li>
+          <li class="nav-item ">
+              <div ngbDropdown class="d-inline-block dropdown">
+                <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>Dropdown</a>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-primary" *ngFor="let tra of tracks">
+                  <a class="dropdown-item" (click)="goTo('track', tra._id)">{{tra.titulo}}</a>
+                </div>
+              </div>
+          </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+          <a class="btn btn-info btn-link"
+            routerLink="/login" *ngIf="!token" >Iniciar Sesion</a>
+          <a class="btn btn-info btn-link"
+            routerLink="/usuarios" *ngIf="admin" >Usuarios</a>
+          <a class="btn btn-info btn-link" routerLink="/register" *ngIf="!token">Registrase</a>
+          <a class="btn btn-info btn-link"
+            routerLink="/perfil" *ngIf="token">PERFIL</a>
+          <a class="btn btn-info btn-link" *ngIf="token"
+            (click)="cerrarSesion()">Cerrar Sesión</a>
+        </form>
+  </div>
+</nav>
+

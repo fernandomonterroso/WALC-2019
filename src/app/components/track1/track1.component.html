@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="page-header page-header-xs" data-parallax="true"
+    style="background-image: url('./assets/img/fabio-mangione.jpg');">
+    <div class="filter"></div>
+  </div>
+  <div class="section profile-content">
+    <div class="container">
+      <div class="owner">
+        <div class="icon icon-warning">
+          <i class="{{iconTrack}}" style="font-size: 7em;"></i>
+        </div>
+        <div class="name">
+          <h4 class="title">{{track.titulo}}<br /></h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <p>{{track.objetivoGeneral}} </p>
+        </div>
+      </div>
+      <br />
+      <div class="nav-tabs-navigation">
+        <div class="nav-tabs-wrapper">
+          <ngb-tabset [justify]="'center'">
+            <ngb-tab title="Descripcion">
+              <ng-template ngbTabContent>
+                <div class="row following" id="follows">
+                  <div class="col-md-6 ml-auto mr-auto ">
+                    <ul class="list-unstyled follows">
+                      <li *ngFor="let des of description">
+                        <div class="row row justify-content-md-center">
+                          <div class="col-md-8">
+                            <h6>{{des.subIndice}}<br /><small>{{des.subDescripcion}}</small></h6>
+                          </div>
+                        </div>
+                        <hr />
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Following">
+              <ng-template ngbTabContent>
+                <h3 class="text-muted">Not following anyone yet :(</h3>
+                <br>
+                <button class="btn btn-warning btn-round">Find artists</button>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

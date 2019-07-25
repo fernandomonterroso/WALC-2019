@@ -1,0 +1,113 @@
+<main role="main" class="container">
+<br><br><br>
+  <div class="row">
+    <div class="col">
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 rounded shadow-sm" style="background-color:#20346B">
+        <div class="lh-100">
+          <h6 class="mb-0 text-white lh-100">PERFIL</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <!-- *ngFor="let datos of users" -->
+            <h6 class="border-bottom border-gray pb-2 mb-0">DATOS</h6>
+            <div class="media text-muted pt-3">
+              <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">Nombre</strong>
+                {{identity.nombre}}
+              </p>
+            </div>
+            <div class="media text-muted pt-3">
+              <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">E-mail</strong>
+                {{identity.email}}
+              </p>
+            </div>
+            <div class="media text-muted pt-3">
+              <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">Rol</strong>
+                {{identity.rol}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <img src="{{ url + '/obtener-imagen-usuario/' + identity.image }}" class="rounded-circle mx-auto d-block"
+            width="270" height="250" *ngIf="identity.image">
+
+          <div class="rounded-circle" *ngIf="!identity.image">
+            <img src="../../../assets/img/logo-en.png" class="mx-auto d-block"
+              style="width: 50%; border-color: red;margin-top: 1%" alt="KINAL" *ngIf="!identity.image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button trigger modal-->
+  <button type="button" class="btn btn-dark my-2 my-sm-0" data-toggle="modal" data-target="#updateModal"
+    style="background-color: #BF9B30">
+    Editar datos
+  </button>
+
+  <!-- Mis Conferencias -->
+  <br>
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0"><strong>{{identity.nombre}}</strong> te inscribiste a</h6>
+
+    <div class="media text-muted pt-3" *ngFor="let conference of conferences">
+      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+        <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+      </svg>
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark">{{conference.nombreCharla}}</strong>
+          <a>{{conference.fecha}}</a>
+        </div>
+        <span class="d-block">{{conference.comunicador}}</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!--MODAL EDITAR PERFIL-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <form #registroForm="ngForm" (ngSubmit)="updateUser()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Actualizar Perfil</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="identity.nombre" class="form-control"
+              id="nombre">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" #email="ngModel" [(ngModel)]="identity.email" class="form-control"
+              id="email">
+          </div>
+          <div class="input-group">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile04" (change)="fileChangeEvent($event)"
+                aria-describedby="inputGroupFileAddon04" name="image" #image='ngModel' [(ngModel)]="identity.image">
+              <label class="custom-file-label" for="inputGroupFile04">Añade una foto de perfil</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" (click)="updateUser()">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
